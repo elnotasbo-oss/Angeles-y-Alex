@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#d9b6ad">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Boda: Maria de los Angeles y Alex</title>
     <style>
@@ -58,14 +59,22 @@
         var sobre = document.getElementById("sobre");
         audio.volume = 0.1;
 
-        // Al hacer clic en el sobre
+       // Al hacer clic en el sobre
         sobre.onclick = function() {
-            // Ocultar sobre
+            // 1. Intentar activar pantalla completa
+            var elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari/iOS */
+                elem.webkitRequestFullscreen();
+            }
+            
+            // 2. Iniciar música
+            audio.play();
+            
+            // 3. Ocultar sobre
             sobre.style.opacity = '0';
             setTimeout(() => { sobre.style.display = 'none'; }, 1000);
-            
-            // Iniciar música
-            audio.play();
         };
 
         // Control de silencio
